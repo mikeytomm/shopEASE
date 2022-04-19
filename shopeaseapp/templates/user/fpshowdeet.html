@@ -1,0 +1,43 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+<div class="row mt-4"id="user_admin"> 
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">s/n</th>
+            <th scope="col">order quantity</th>
+            <th scope="col">order deet amount</th>
+            <th scope="col">product name</th>
+
+            
+
+           </tr>
+        </thead>
+        <tbody>
+          <tr>
+          
+            {%for i in list2%}
+            
+            
+            <td>{{loop.index}}</td>
+            <td>{{i.orderdeet_quantity}}</td>
+            <td>{{i.orderdeet_amt}}</td>
+            <td>{{i.orderdeet_product.product_name}}</td>
+
+            
+            
+            
+
+
+          </tr>
+          {% endfor %}
+  
+        </tbody>
+      </table>
+
+
+
+
+
+{% endblock %}

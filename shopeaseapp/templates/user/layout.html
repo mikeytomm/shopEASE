@@ -1,0 +1,445 @@
+<html lang="en">
+  <head>
+      <title>shopease</title>
+          <meta charset="utf-8">
+          <meta name="description" content="shopEASE is an ecommerce site with focus to solving basic reach of products and customers to users and vendors respectively">
+          <meta name="keywords" content="ecommerce ,lagos, vendor ,paystack ,food & drinks,store ">
+          <meta name="author" content="olawale tomiwa dimeji,olawaletomiwa@gmail.com">
+
+	        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no ">
+        	<link type="text/css" href="{{url_for('static',filename='css/bootstrap.css')}}" rel="stylesheet">
+	        <link href="{{url_for('static',filename='fontawes/css/all.css')}}" rel="stylesheet">
+	        <link  rel="stylesheet"  href="{{url_for('static',filename='animate.css-main/animate.css')}}">
+	
+<style>
+*{border:0px solid red;
+box-sizing:border-box;
+ }
+ 
+.item{
+border:thin dashed grey;
+border-radius:20px
+}
+
+li a{text-decoration:none;
+color:black
+}
+
+li a:hover{
+color:red
+}
+
+
+
+#alone2{
+min-height:500px;
+background-image:"{{url_for('static',filename='banner11.jpg')}}";
+background-repeat:no-repeat;
+background-size:cover;
+}
+
+.red {
+	width: 100%;
+	height: auto;
+	display: inline-block;
+}
+
+.headblackcol{
+color:#eaeaea;
+text-decoration:none
+}
+.headselectcol{
+background-color:#222222
+
+}
+
+.inner{
+      font-family: 'Pacifico', cursive;
+	  font-weight:bold;
+	  
+	  color:black;}
+
+ul li{
+display:block
+}
+
+.hove:hover{
+color:yellow
+}
+
+.hov:hover{
+color:red !important
+}
+
+.dropdown{
+display:none;
+background-color:white;
+list-style:none;
+position:absolute;
+background-color:#F1F1F1;
+color:#F1F1F1}
+
+.drop{
+list-style:none
+}
+
+.drop:hover  .dropdown{
+display:block
+}
+
+a{
+text-decoration:none;
+color:grey
+}
+a:hover{
+color:red
+}
+
+li a:hover{
+color:red
+}
+
+ li a{text-decoration:none;
+color:black
+}
+#product{
+border:0px solid red;
+min-height:100px
+}
+
+#productimg{
+min-height:500px;
+background-image:url "{{url_for('static',filename='banner13.jpg')}}";
+background-repeat:no-repeat;
+background-size:cover;
+border:1px solid grey
+}
+
+.altproductimg{
+min-height:110px;
+border:1px solid grey
+}
+
+.qtyaction{
+border:1px solid grey;
+width:30px;
+font-weight:bold
+}
+
+.productdet:hover{
+color:red
+}
+.btnquant:hover{
+background-color:red
+}
+
+.vendloghov a:hover{
+color:yellow
+} 
+
+.vendsignhov a:hover{
+color:red
+} 
+
+          </style>
+    </head>
+<body >
+  <div class="row" style="background-color:#222222">
+    <div class="offset-md-6 col-md-2 mt-2 headblackcol hove text-center menu-area">
+        {% if session.get("loggedin") != None %}
+        <ul >
+           <li class="drop" ><i class="fa fa-user"></i><span style="font-size:20px"> WELCOME {{userdeets.user_fname.upper()}}</span> </li>
+        </ul>
+   </div>
+
+    <div class="  col-md-2 mt-2 headblackcol hove text-center">
+      <i class="fa fa-id-card "></i><span style="font-size:20px" ><a  href="/user/edit/profile" class="headblackcol hove"> View Profile</a></span>
+    </div>
+    <div class="  col-md-2 mt-2 headblackcol hove text-center ">
+      <i class="fa fa-power-off"></i><span style="font-size:20px"><a  href="{{url_for('user_logout')}}" class="headblackcol hove"> LOGOUT</a></span>
+    </div>
+    
+{% else %}
+<ul >
+<li class="drop" ><i class="fa fa-user"></i><span style="font-size:20px"> My account</span>
+		<ul class="dropdown">
+		<li ><a href="{{url_for('user_signup')}}">Sign up</a></li>
+		<li ><a href="{{url_for('user_login')}}">Login</a></li>
+		</ul>
+</li>
+ </ul>
+ 
+</div>
+<div class="  col-md-2 mt-2 headblackcol hove text-center">
+<i class="fa fa-credit-card "></i><a href="/checkout"><span style="font-size:20px" > Checkout</span></a>
+</div>
+<div class="  col-md-2 mt-2 headblackcol hove text-center ">
+<i class="fa fa-store"></i><span style="font-size:20px"><a  href="{{url_for('vendor')}}" class="headblackcol hove"> Become A Vendor</a></span>
+{% endif %}
+</div>
+
+
+</div>
+<div class="container">
+<div class="row mt-2 " style="background-color:#ffffff">
+<div class=" col-md-3 mt-3  ">
+<span class="hov" ><i  class="fa fa-truck img-fluid rounded-circle text-center "  style="font-size:30px;border-radius:50px"></i> Free Delivery Nationwide</span>
+</div>
+<!--imporatnt way--> 
+<div class=" col-md-3 mt-3  ">
+<span class="hov" ><i  class="fa fa-user-plus img-fluid rounded-circle text-center "  style="font-size:30px;border-radius:50px"></i> Free Vendor Registration</span>
+</div>
+<div class=" col-md-3 mt-3">
+
+<span class="hov"><i  class="fa-solid fa-tag img-fluid rounded-circle text-center"  style="font-size:30px;border-radius:50px"></i> Enjoyable Discounts</span>
+</div>
+<div class=" col-md-3 mt-3">
+<span class="hov"><i  class="fa fa-gift img-fluid rounded-circle text-center"  style="font-size:30px;border-radius:50px"> </i> Free Gifts For Every 10 Buys</span>
+
+</div>
+</div>
+<!--nav starts here-->
+<div class="row sticky-top ">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid ">
+  <div class="row sticky-top ">
+  <div class="col-md-2 "><a href="/">
+<h2>shop<span style="color:red;font-size:50px">EASE</span></h2></a>
+
+</div>
+<div class="col-md-10 ">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center ms-5 ps-5 mt-3" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item ">
+          <a class="nav-link active inner hov" aria-current="page" href="{{url_for('home')}}">Home</a>
+        </li>
+        
+		<ul >
+
+<li class="drop nav-item ms-2 " >
+          <a class="nav-link inner hov" href="#">Categories</a>
+		<ul class="dropdown">
+      {% for i in categorydeets%}
+		<li ><a href="/user/category/{{i.category_id}}" id='{{i.category_id}}'>{{i.category_name}}</a></li>
+      {% endfor %}
+		</ul>
+</li>
+        </ul>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		 
+		<form class="d-flex flex-fill  ps-5" action="{{url_for('search')}}" method='POST'>
+      <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+        <input class="form-control me-2 btn-outline-danger " name='searchtext'type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-danger" type='submit'> Search</button>
+      </form>
+        
+		<li class="nav-item ms-3">
+          <a class="nav-link inner hov" href="/cart">Cart({{session['shoppingcart']|length}})</a>
+        </li>
+        
+      </ul>
+       </div>
+    </div>
+	
+  </div>
+</nav>
+</div>
+<!--4a starts here-->
+
+{% block pagecontent %}
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+<!--4a starts here-->
+<div class="container"> 
+<div class="row mt-4" style="background-color:#f8f8f6">
+<div class="offset-md-0 col-md-4 mt-3 text-center">
+<h4 style="color:red">contact us</h4>
+<br>
+<p> 
+  <a href="https://olawaletomiwa@gmail.com" target="_blank">&nbsp&nbsp  <i class="fas fa-at"style="font-size:30px;color:red" ></i>&nbsp <span style="color:black; font-family: 'Prompt', sans-serif; "  >olawaletomiwa@gmail.com</a></span></p>
+<p> <a href="#">&nbsp&nbsp  <i class="fas fa-phone" style="font-size:30px;color:red"></i>&nbsp <span style="color:black; font-family: 'Prompt', sans-serif; " >+2348161830737</a></span>
+</p>
+</div>
+<div class="mt-3 col-md-4 mt-3 text-center">
+<h4  style="color:red">Socials</h4>
+<br>
+<p>
+  <a href="https://instagram.com" target="_blank">&nbsp&nbsp  <i class=" fab fa-instagram" style="font-size:30px;color:red"></i>&nbsp <span style="color:black; font-family: 'Prompt', sans-serif; "   >Follow Us</a></span>
+  </p>
+<p>
+  <a href="https://twitter.com" target="_blank">&nbsp&nbsp  <i class="fab fa-twitter"style="font-size:30px;color:red" ></i>&nbsp <span style="color:black; font-family: 'Prompt', sans-serif; "  >Tweet @ Us</a></span>
+</p>
+<p><a href="https://facebook.com" target="_blank">&nbsp&nbsp  <i class="fab fa-facebook" style="font-size:30px;color:red"></i>&nbsp <span style="color:black; font-family: 'Prompt', sans-serif; "  >Be Our Friend</a></span></p>
+
+
+</div>
+
+
+<div class="mt-3 col-md-4 text-center">
+  
+<h4 style="color:red">Newsletter</h4>
+<br>
+<h6 style="color:red">Kindly Subscribe To Our Newsletter</h6>
+<form action="/newsletter/submit" method="POST">
+<input type="hidden" name="csrf_token" value="{{csrf_token()}}" class='form-control'>
+<input style="border:2px solid black"type="email" placeholder="Enter Your Email" name="mail">
+<button class="btn btn-danger mt-2 " type="submit">Subscribe</button>
+</form>
+</div>
+<div class='col-md-12 text-center'>
+  <p style="color:red">DEVELOPED BY OLAWALETOMIWA &COPY 2022</p>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<script src="{{url_for('static',filename='jquery.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.bundle.min.js')}}"></script>
+<script type="text/javascript" language="javascript" >
+
+
+function show_orderdiv(){
+document.getElementById('vendorder').style.display="block"
+document.getElementById('vendupload').style.display="none"
+document.getElementById('venduploadhistory').style.display="none"
+document.getElementById('vendorderhistory').style.display="none" 
+}
+function show_uploaddiv(){
+document.getElementById('vendupload').style.display="block"
+document.getElementById('vendorder').style.display="none"
+document.getElementById('venduploadhistory').style.display="none"
+document.getElementById('vendorderhistory').style.display="none" 
+
+
+}
+function vend_uploadhistory(){
+  document.getElementById('venduploadhistory').style.display="block" 
+  document.getElementById('vendupload').style.display="none"
+  document.getElementById('vendorder').style.display="none"
+  document.getElementById('vendorderhistory').style.display="none" 
+
+}
+
+function vend_orderhistory(){
+  document.getElementById('vendorderhistory').style.display="block" 
+  document.getElementById('venduploadhistory').style.display="none" 
+  document.getElementById('vendupload').style.display="none"
+  document.getElementById('vendorder').style.display="none"
+
+}
+
+
+
+function admin_category(){
+  document.getElementById('category_admin').style.display="block" 
+  document.getElementById('user_admin').style.display="none" 
+  document.getElementById('product_admin').style.display="none"
+  document.getElementById('order_admin').style.display="none"
+  document.getElementById('payment_admin').style.display="none"
+  document.getElementById('vendor_admin').style.display="none"
+  document.getElementById('order_deets').style.display="none"
+
+}
+
+function admin_user(){
+  document.getElementById('category_admin').style.display="none" 
+  document.getElementById('user_admin').style.display="block" 
+  document.getElementById('product_admin').style.display="none"
+  document.getElementById('order_admin').style.display="none"
+  document.getElementById('payment_admin').style.display="none"
+  document.getElementById('vendor_admin').style.display="none"
+  document.getElementById('order_deets').style.display="none"
+
+}
+
+function admin_product(){
+  document.getElementById('category_admin').style.display="none" 
+  document.getElementById('user_admin').style.display="none" 
+  document.getElementById('product_admin').style.display="block"
+  document.getElementById('order_admin').style.display="none"
+  document.getElementById('payment_admin').style.display="none"
+  document.getElementById('vendor_admin').style.display="none"
+  document.getElementById('order_deets').style.display="none"
+
+}
+
+function admin_order(){
+  document.getElementById('category_admin').style.display="none" 
+  document.getElementById('user_admin').style.display="none" 
+  document.getElementById('product_admin').style.display="none"
+  document.getElementById('order_admin').style.display="block"
+  document.getElementById('payment_admin').style.display="none"
+  document.getElementById('vendor_admin').style.display="none"
+  document.getElementById('order_deets').style.display="none"
+
+}
+
+function admin_payment(){
+  document.getElementById('category_admin').style.display="none" 
+  document.getElementById('user_admin').style.display="none" 
+  document.getElementById('product_admin').style.display="none"
+  document.getElementById('order_admin').style.display="none"
+  document.getElementById('payment_admin').style.display="block"
+  document.getElementById('vendor_admin').style.display="none"
+  document.getElementById('order_deets').style.display="none"
+
+}
+
+function admin_vendor(){
+  document.getElementById('category_admin').style.display="none" 
+  document.getElementById('user_admin').style.display="none" 
+  document.getElementById('product_admin').style.display="none"
+  document.getElementById('order_admin').style.display="none"
+  document.getElementById('payment_admin').style.display="none"
+  document.getElementById('vendor_admin').style.display="block"
+  document.getElementById('order_deets').style.display="none" 
+
+}
+
+function order_deet(){
+  document.getElementById('order_deets').style.display="block" 
+  document.getElementById('category_admin').style.display="none" 
+  document.getElementById('user_admin').style.display="none" 
+  document.getElementById('product_admin').style.display="none"
+  document.getElementById('order_admin').style.display="none"
+  document.getElementById('payment_admin').style.display="none"
+  document.getElementById('vendor_admin').style.display="none"
+
+}
+
+
+
+</script>
+</body>
+</html>

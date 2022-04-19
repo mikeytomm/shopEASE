@@ -1,0 +1,57 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+
+
+<div id="vendupload"class="row">
+    <div class="offset-md-1 col-md-10">
+        
+
+    <h2 class=" animate__animated  animate__fadeInUpBig text-center "style="color:#DC3545"> edit Uploaded products here</h2>
+    {%set msg= get_flashed_messages()%}
+              {%for i in msg:%}
+    <h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+              
+              {%endfor%} 
+              
+    <form action="/vendor/editupload/submit/{{productdeets.product_id}}" method="POST" enctype="multipart/form-data">
+    <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+    <input class="form-control" type="text" name="product_name" value="{{productdeets.product_name}}" id="productnameid" placeholder="product_name">
+    <br>
+    
+    <input class="form-control" type="number" name="product_quantity" value="{{productdeets.product_quantity}}" id="quantityid" placeholder=" product quantity">
+    <br>
+    <input class="form-control"type="text" name="product_price" value="{{productdeets.product_price}}" id="productpriceid" placeholder="product price" >
+    <br>
+    <input class="form-control"type="textarea" name="product_description" value="{{productdeets.product_description}}" id="productdescriotionid" placeholder="product description" >
+    
+    <div>
+        <br>
+    <input class="form-control" type="file" name="image"  value="{{productdeets.product_image}}"id="mainproductimage" placeholder="product main image" >
+    <br>
+    
+    <select name="product_category" class="form-control">
+       
+        <option  >choose a category</option>
+        {% for i in categorydeets %}
+        <option value="{{i.category_id}}" >{{i.category_name}}</option>
+        {% endfor %}
+    </select>
+    <input class="form-control"type="hidden" name="product_vendorid" value="{{productdeets.product_vendorid}}" id="productdescriotionid" placeholder="product description" >
+    </div>
+    
+    <br>
+    <button type="submit" name="upload_product" class="form-control btn btn-danger mt-2" style="color:fff" >upload</button>
+    
+    </form>
+ 
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+{% endblock %}

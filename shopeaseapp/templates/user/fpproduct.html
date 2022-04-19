@@ -1,0 +1,138 @@
+<!-- header ends here -->
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+<!--heADER starts here-->
+<!--content  starts here-->
+
+<div class="container" id="product">
+
+<div class='row mt-3'>
+<!--main product image  starts here-->
+<div class='col-md-4'  >
+    <img  height='300px'  class="item mt-3" src="/static//uploadedimg/{{productdeets.product_image}}"width='100%' >
+</div>
+<!--main product image  ends here-->
+<!--main product name and ratimngs starts here-->
+<div class=' col-md-8'>
+<div class='row'>
+<!--main product name  starts here-->
+<div class=' offset-md-1 col-md-11 ' >
+<h4 style="color:red">{{productdeets.product_name}}</h4>
+<h5 style="color:black;font-size:30px;">#{{productdeets.product_price}}</h5>
+
+<hr>
+<h4 style="color:red">Store Name</h4>
+<h5 style="color:grey">{{productdeets.productvendobj.vendor_storename}}</h5>
+<hr>
+</div>
+<div class=' offset-md-1 col-md-11 ' >
+<h4 style="color:red">Product Description</h4>
+<h5 style="color:grey">{{productdeets.product_description}}</h5>
+
+<hr>
+</div>
+
+</div>
+<div class=' offset-md-1 col-md-11'style="min-height:50px" >
+<div class='row'>
+
+
+<div class=' col-md-4  ' >
+    <form action="/addcart" method="POST" >
+        <input class="form-control" type="number" name="quantity" value=""  min='1' id="quantity" placeholder="Choose Quantity">
+        <input type="hidden" class="form-control" name="userid" value="{{userdeets.user_id}}">
+        <input type="hidden" class="form-control" name="vendorid" value="{{productdeets.product_vendorid}}">
+        <input type="hidden" class="form-control" name="categoryid" value="{{productdeets.product_categoryid}}">
+        <input type="hidden" class="form-control" name="productid" value="{{productdeets.product_id}}">
+        <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+<button type="submit" class="form-control btn btn-danger "> Add to cart </button>
+    </form>
+</div>
+
+</div>
+<hr>
+</div>
+
+
+</div>
+
+</div>
+
+
+<!--main product name and ratings  starts here-->
+
+
+
+<!--main product name and ratings  ends here-->
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class='container'>
+    <hr>
+    <div class="row">
+        <div class='  col-md-3 text-center'>
+            <h4 style="color:red">SIMILAR PRODUCTS</h4>
+        </div>
+        <hr>
+    </div>
+    <div class="row">
+        {% if productcatsame %}
+        {% for i in  productcatsame %}
+        <div class=' col-md-3  text-center'  >
+            <a href="/product/{{i.product_id}}">
+            <img height='300px' class="item" src="/static//uploadedimg/{{i.product_image}}"width='100%'>
+            <span class='inner hov' style="color:black;font-size:20px"  >#{{i.product_name}}</span>
+            <br>
+            <span  class='inner hov'style="color:black;font-size:20px;font-weight:bold"  >#{{i.product_price}}</span>
+        </a>
+    </div>
+    {% endfor %}
+    {%else%}
+    <div class="col-md-12 alert alert-danger">OOPS Sorry no similar product found</div>
+    {%endif%}
+    
+    </div>
+    <hr>
+    </div>
+
+
+
+
+<div class='container'>
+<hr>
+<div class="row">
+    <div class='  col-md-12 '>
+        <h4 style="color:red">Other PRODUCTS by {{productdeets.productvendobj.vendor_storename}}</h4>
+    </div>
+    <hr>
+</div>
+<div class="row">
+    {%if productvendsame%}
+    {% for i in productvendsame%}
+    <div class=' col-md-3  text-center'>
+        <a href="/product/{{i.product_id}}">
+        <img  height='300px' class="item" src="/static//uploadedimg/{{i.product_image}}"width='100%'>
+        <span  class='inner hov'style="color:black;font-size:20px" >#{{i.product_name}}</span>
+        <br>
+        <span  class='inner hov' style="color:black;font-size:20px;font-weight:bold" >#{{i.product_price}}</span>
+    </a>
+</div>
+{% endfor %}
+{%else%}
+<div class="col-md-12 alert alert-danger">OOPS sorry no similar category found</div>
+{%endif%}
+
+</div>
+</div>
+
+<!-- contents ends here-->
+{% endblock %}

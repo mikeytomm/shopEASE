@@ -1,0 +1,155 @@
+
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+<!--4a starts here-->
+<div class="row">
+  {%set msg= get_flashed_messages()%}
+{%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+
+{%endfor%}  
+<!--4 carousel starts here-->
+<div class=" col-md-6 mt-2 ">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button  type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" ></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+    
+      <img src="{{url_for('static',filename='slideshow1.jpg')}}" class="d-block w-100" alt="...">
+   
+    </div>
+    <div class="carousel-item">
+      <img src="{{url_for('static',filename='slide22.jpg')}}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{{url_for('static',filename='111.jpg')}}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div>
+<!--4bstarts here-->
+<div class="col-md-6 mt-2">
+<div class="row">
+<!--4bi starts here-->
+<div id="4bi" class=" col-md-12 shake1" >
+<img  src="{{url_for('static',filename='SAM.jpg')}}"width='100%'>
+</div>
+<!--4bii starts here-->
+<div class=" col-md-6 mt-4 shake2">
+<img  src="{{url_for('static',filename='or.jpg')}}"width='100%' height="202 px">
+</div>
+<!--4biii starts here-->
+<div class="col-md-6 mt-4 shake3">
+<img  src="{{url_for('static',filename='copy.jpg')}}"width='100%' height='202px'>
+</div>
+</div>
+</div>
+</div>
+<!--5 starts here-->
+
+
+
+<div class="row mt-5">
+
+{% for i in productdeets %}
+<div class=" col-md-3 shake5 text-center">
+<a href="/product/{{i.product_id}}">
+<img height='300px' class="item" src="/static/uploadedimg/{{i.product_image}}"width='100%'>
+<span  class='inner hov' style="color:black;font-size:20px;font-weight:bold;">{{i.product_name}}</span>
+<br>
+<span  class='inner hov' style="color:black;font-size:20px ;font-weight:bold;">#{{i.product_price}}</span>
+</a>
+</div>
+{% endfor %}
+</div>
+
+
+
+
+<div class="row mt-4">
+<div class=" col-md-12">
+<h3 style="color:red"  class='inner hov alert alert-success text-center'> 1K ARENA</h3></div>
+
+
+  {% for i in product1k %}
+  <div class=" col-md-3 shake12 text-center">
+  <a href="/product/{{i.product_id}}">
+    <img height='300px' class="item" src="/static/uploadedimg/{{i.product_image}}"width='100%'>
+    <span  class='inner hov' style="color:black;font-size:20px;font-weight:bold;">{{i.product_name}}</span>
+    <br>
+    <span  class='inner hov'style="color:black;font-size:20px ;font-weight:bold;">#{{i.product_price}}</span>
+    </a>
+    
+  </div>
+  {%endfor%}
+</div>
+
+
+
+
+<div class="row mt-4">
+  <div class=" col-md-12">
+    <h3 style="color:red"  class='inner hov alert alert-success text-center'>everything CHOP-CHOP</h3>
+  </div>
+    {% for i in productchopchop%}
+<div class=" col-md-3   shake18 text-center">
+  <a href="/product/{{i.product_id}}">
+    <img height='300px' class="item" src="/static/uploadedimg/{{i.product_image}}"width='100%'>
+    <span   class='inner hov' style="color:black;font-size:20px;font-weight:bold;">{{i.product_name}}</span>
+    <br>
+    <span  class='inner hov'style="color:black;font-size:20px ;font-weight:bold;">#{{i.product_price}}</span>
+    </a>
+   
+</div>
+{%endfor%}
+</div>
+
+
+
+<div class="row mt-5 ">
+<div class=" col-md-6 shake22 ">
+<img src="{{url_for('static' ,filename='banner12.jpg')}}"width='100%'>
+</div>
+<div class=" col-md-3  shake23">
+<img src="{{url_for('static',filename='blog-banner1.jpg')}}"width='100%'>
+</div>
+<div class=" col-md-3  shake24">
+<img src="{{url_for('static',filename='banner13.jpg')}}"width='100%'>
+ </div>
+
+</div>
+<div class="row mt-5 text-center">
+  <div class=" col-md-12">
+    <h3 style="color:red"  class='inner hov alert alert-success'>EVEYTHING ELECTRONICS</h3>
+    
+  </div>
+  {% for i in productelectronics %}
+  <div class=" col-md-3 shake25">
+    <a href="/product/{{i.product_id}}">
+      <img height='300px' class="item" src="/static/uploadedimg/{{i.product_image}}"width='100%'>
+      <span   class='inner hov' style="color:black;font-size:20px;font-weight:bold;">{{i.product_name}}</span>
+      <br>
+      <span  class='inner hov'style="color:black;font-size:20px ;font-weight:bold;">#{{i.product_price}}</span>
+      </a>
+  </div>
+  {%endfor%}
+</div>
+
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+
+<div class=" row mt-3">
+    
+{% if results %}
+    {% for i in results %}
+<div class=" col-md-3 shake5 text-center">
+    <a href="/product/{{i.product_id}}">
+        <img height='300px' class="item" src="/static/uploadedimg/{{i.product_image}}"width='100%'>
+        <span  class='inner hov' style="color:black;font-size:20px;font-weight:bold;">{{i.product_name}}</span>
+        <br>
+        <span  class='inner hov'style="color:black;font-size:20px ;font-weight:bold;">#{{i.product_price}}</span>
+        </a>
+</div>
+        {% endfor %}
+    {% else %}
+
+ <h2 class=" animate__animated  animate__fadeInUpBig text-center "style="color:#DC3545">OOPS!! No product was found</h2>
+        {% endif %}
+
+
+</div>
+
+
+{% endblock %}

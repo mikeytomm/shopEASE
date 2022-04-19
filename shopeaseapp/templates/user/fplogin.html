@@ -1,0 +1,42 @@
+
+<!-- header ends here -->
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+<!--login form starts here-->
+<div class="row  text-center" >
+<div class="col-md-6">
+<img src="{{url_for('static',filename='l.webp')}}" width="100%" class="animate__animated  animate__swing" >
+
+</div>
+<div class="col-md-6">
+<div class="row">
+<div class=" col-md-12  mt-5"  id="login"  style="min-height:300px" >
+<form action="{{url_for('user_logsub')}}" method="POST">
+<h2 class=" animate__animated  animate__fadeInUpBig" style="color:#DC3545">Log In</h2>
+{%set msg= get_flashed_messages()%}
+          {%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+          
+          {%endfor%}   
+
+
+
+<input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+<input  class="form-control mt-3"type="email" placeholder="enter your valid email" name="email" value="">
+<br>
+<input class="form-control" type="password" placeholder="enter your password" name="password" value="">
+<br>
+<button type="submit" name="submit" class="btn btn-danger form-control" >Login</button>
+<br>
+<h6>Forgotten password? Kindly click <a href="#">here</a></h6>
+</form>
+</div>
+</div>
+</div>
+</div>
+<!--login form ends here-->
+
+
+
+<!-- footer starts here -->
+{% endblock %}

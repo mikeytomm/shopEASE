@@ -1,0 +1,45 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+
+<div class="row  text-center" >
+<div class="col-md-12">
+<h2 class=" animate__animated  animate__fadeInUpBig" style="color:#DC3545;font-family:'Rubik Beastly', cursive">Hurry up vendor    !!!    Millions of users waiting for you</h2>
+<hr>
+</div>
+</div>
+
+
+
+<!--login form starts here-->
+<div class="row  text-center" >
+<div class="col-md-6">
+<img src="{{url_for('static',filename='vv.webp')}}" width="100%" height="400px" class="animate__animated  animate__swing" >
+
+</div>
+<div class="col-md-6">
+<div class="row">
+<div class=" col-md-12  mt-5"  id="login"  style="min-height:300px" >
+<form action="{{url_for('vendor_login_submit')}}" method="POST">
+<h2 class=" animate__animated  animate__fadeInUpBig" style="color:#DC3545">Log In</h2>
+{%set msg= get_flashed_messages()%}
+          {%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+{% endfor %}
+<input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+<input  class="form-control mt-3"type="email" placeholder="enter your valid email" name="vendor_email" value="">
+<br>
+<input class="form-control" type="password" placeholder="enter your password" name="vendor_password" value="">
+<br>
+<button type="submit" name="vendor_loginsubmit" class="btn btn-danger form-control" >Login</button>
+<br>
+<h6>Forgotten password? Kindly click <a href="#">here</a></h6>
+</form>
+</div>
+</div>
+</div>
+</div>
+<!--login form ends here-->
+
+
+
+{% endblock %}

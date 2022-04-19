@@ -1,0 +1,81 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+<div class="row mt-4"id="user_admin"> 
+  
+  {%set msg= get_flashed_messages()%}
+{%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+
+{%endfor%}  
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">s/n</th>
+            <th scope="col">product image</th>
+            <th scope="col">product name</th>
+            <th scope="col">product price</th>
+            <th scope="col">quantity</th>
+            <th scope="col"> sub total</th>
+            <th scope="col"> remove cart</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for key,prod in session['shoppingcart'].items()  %}
+          <tr>
+            <td scope="row">{{loop.index}}</td>
+            <td><img src='/static/uploadedimg/{{prod.image}}'width="100"></td>
+            <td>{{prod.name}}</td>
+            <td>{{prod.price}}</td>
+            <td>{{prod.quantity}}</td>
+            {%set SubTotal=prod.quantity|int*prod.price|float%}
+            <td>{{SubTotal}}</td>
+            <td><form action='/remove/cart/{{prod.id}}' ><button type='submit' class='btn btn-danger form-control'>delete item</button></form></td>
+           
+ </tr>
+    {% endfor %}     
+        </tbody>
+      </table>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">vat</th>
+            <th scope="col">total payable</th>
+          </tr>
+        </thead>
+      <tbody>
+          <tr>
+            <td>{{vat}}</td>
+            <td>{{grandtotal}}</td>
+            </tr>
+        </tbody>
+      </table>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class=' col-md-4  ' >
+      <form action='/clear/cart' >
+        <button type='submit' class='btn btn-danger form-control'>Empty cart</button>
+      </form></div>
+    </div>
+    <div class=' col-md-4  ' >
+      <form action='/checkout' method="POST" >
+        <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+        <input type="hidden" class="form-control" name="grandtotal" value="{{grandtotal}}">
+        <button type='submit' class='btn btn-success form-control'>proceed to checkout</button>
+      </form></div>
+    </div>
+
+
+
+{% endblock %}

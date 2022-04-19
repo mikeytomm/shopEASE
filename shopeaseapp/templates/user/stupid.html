@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {{productdeets}}
+{{userdeets}}
+
+
+{%set msg= get_flashed_messages()%}
+          {%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+          
+          {%endfor%}  
+    <form action="/user/product/order/submit/{{productdeets.product_id}}" method="POST" >
+        <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+        <input class="form-control" type="number" name="quantity" value="1" id="quantity" placeholder="quantity">
+        <input type="hidden" class="form-control" name="userid" value="{{userdeets.user_id}}">
+        <input type="hidden" class="form-control" name="vendorid" value="{{productdeets.product_vendorid}}">
+        <input type="hidden" class="form-control" name="categoryid" value="{{productdeets.product_categoryid}}">
+        <input type="hidden" class="form-control" name="productid" value="{{productdeets.product_id}}">
+        <button type="submit" name="order_submit" class="form-control btn btn-danger mt-2" style="color:fff" >order</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+<div class="row  text-center" >
+<div class="col-md-12">
+  {% if session.get("logged") != None %}
+  <h2 class=" animate__animated  animate__fadeInUpBig offset-md-3 col-md-6" style="color:#DC3545">welcome ADMIN   {{admindeets.admin_id}}</h2>
+  {% endif %}
+<a href="{{url_for('admin_logout')}}" class="btn btn-danger col-md-2">LOG OUT</a>
+{%set msg= get_flashed_messages()%}
+          {%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+          
+          {%endfor%} 
+
+</div>
+</div>
+<div class="row  mt-4"  style="min-height:100px">
+  <div class="col-md-2 text-center" style="background-color:yellow ;color:red">
+   <a> <h4 style="text-align:center;vertical-align:middle;line-height:200px" onclick="admin_category()">categories </h4></a>
+  </div>
+  <div class="col-md-2" style="background-color:red ;color:yellow">
+    <a><h4 style="text-align:center;vertical-align:middle;line-height:200px"onclick="admin_user()">users </h4></a>
+  </div>
+  
+  <div class="col-md-2" style="background-color:yellow ;color:red">
+    <a><h4 style="text-align:center;vertical-align:middle;line-height:200px"onclick="admin_product()">products</h4></a>
+  </div>
+  <div class="col-md-2" style="background-color:red ;color:yellow">
+    <a><h4 style="text-align:center;vertical-align:middle;line-height:200px"onclick="admin_order()">orders </h4></a>
+  </div>
+  <div class="col-md-2" style="background-color:yellow ;color:red">
+    <h4 style="text-align:center;vertical-align:middle;line-height:200px"onclick="admin_payment()">payment</h4></a>
+  </div>
+  <div class="col-md-2" style="background-color:red;color:yellow">
+    <a><h4 style="text-align:center;vertical-align:middle;line-height:200px"onclick="admin_vendor()">vendor </h4></a>
+  </div>
+  <div class="col-md-2" style="background-color:red;color:yellow">
+    <a><h4 style="text-align:center;vertical-align:middle;line-height:200px"onclick="order_deet()">order details </h4></a>
+  </div>
+</div>
+
+<div class="row mt-4" id="category_admin"style="display:none"> 
+<div class="col-md-12">
+<form action="/admin/add_category" method="POST">
+  <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+  <input  class="form-control mt-3"type="text" placeholder="ENTER A NEW CATEGORY " name="admin_addcatname" value="">
+  <br>
+  <button type="submit" name="admin_categorysubmit" class="btn btn-danger form-control" >add CATEGORY</button>
+</form>
+</div>
+<div class="col-md-12 table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">s/n</th>
+        <th scope="col">CATEGORY ID</th>
+        <th scope="col">CATEGORY NAME</th>
+       </tr>
+    </thead>
+    <tbody>
+      <tr>
+      
+       
+       {% for i in  category %}
+        <td>{{loop.index}}</td>
+        <td>{{i.category_id}}</td>
+        <td>{{i.category_name}}</td>
+      </tr>
+  {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+
+  <div class="row mt-4"id="user_admin"style="display:none"> 
+    <div class="col-md-12 table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">s/n</th>
+            <th scope="col">user ID</th>
+            <th scope="col">user lastNAME</th>
+            <th scope="col">user firstNAME</th>
+            <th scope="col">user email</th>
+            <th scope="col">user phoneno</th>
+            <th scope="col">user addreess</th>
+
+           </tr>
+        </thead>
+        <tbody>
+          <tr>
+          
+           
+           {% for i in  users %}
+            <td>{{loop.index}}</td>
+            <td>{{i.user_id}}</td>
+            <td>{{i.user_lname}}</td>
+            <td>{{i.user_fname}}</td>
+           
+             <td>{{i.user_email}}</td>
+             <td>{{i.user_phoneno}}</td>
+             <td>{{i.user_address}}</td>
+
+
+          </tr>
+      {% endfor %}
+        </tbody>
+      </table>
+
+
+
+
+
+
+
+
+
+
+    </div>
+    </div>
+
+    <div class="row mt-4" id="product_admin"style="display:none"> 
+      <div class="col-md-12 table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">s/n</th>
+              <th scope="col">product ID</th>
+              <th scope="col">product NAME</th>
+              <th scope="col">product quantity</th>
+              <th scope="col">product price</th>
+              <th scope="col">product image</th>
+              <th scope="col">product description</th>
+              <th scope="col">product vendorID</th>
+              <th scope="col">product categoryID</th>
+              
+             </tr>
+          </thead>
+          <tbody>
+            <tr>
+            
+             
+             {% for i in  product %}
+              <td>{{loop.index}}</td>
+              <td>{{i.product_id}}</td>
+              <td>{{i.product_name}}</td>
+              <td>{{i.product_quantity}}</td>
+              <td>{{i.product_price}}</td>
+              <td><img src='/static/uploadedimg/{{i.product_image}}'width="100"></td>
+              <td>{{i.product_description}}</td>
+              <td>{{i.product_vendorid}}</td>
+              <td>{{i.product_categoryid}}</td>
+
+            </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+
+
+
+
+      </div>
+      </div>
+
+      <div class="row mt-4" id="order_admin"style="display:none"> 
+        <div class="col-md-12 table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">s/n</th>
+                <th scope="col">order ID</th>
+                <th scope="col">order status</th>
+                
+                
+                
+                <th scope="col">order userid</th>
+                <th scope="col">order ref</th>
+               
+                <th scope="col">order datetime</th>
+
+               </tr>
+            </thead>
+            <tbody>
+              <tr>
+              
+               
+               {% for i in  order %}
+                <td>{{loop.index}}</td>
+                <td>{{i.order_id}}</td>
+                <td>{{i.order_status}}</td>
+                
+                <td>{{i.order_userid}}</td>
+                <td>{{i.order_ref}}</td>
+
+               
+                <td>{{i.order_datetime}}</td>
+             
+              </tr>
+          {% endfor %}
+            </tbody>
+          </table> 
+        </div>
+        </div>
+
+        <div class="row mt-4" id="payment_admin"style="display:none"> 
+          <div class="col-md-12 table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">s/n</th>
+                  <th scope="col">payment ID</th>
+                  <th scope="col">payment amount</th>
+                  <th scope="col">payment status</th>
+                  <th scope="col">payment ref no</th>
+                  <th scope="col">payment datetime</th>
+                  <th scope="col">payment userrid</th>
+                  <th scope="col">payment orderid</th>
+                 </tr>
+              </thead>
+              <tbody>
+                <tr>
+                 {% for i in  payment %}
+                  <td>{{loop.index}}</td>
+                  <td>{{i.payment_id}}</td>
+                  <td>{{i.payment_amount}}</td>
+                  <td>{{i.payment_status}}</td>
+                  <td>{{i.payment_ref}}</td>
+                  <td>{{i.payment_datetime}}</td>
+                  <td>{{i.payment_userid}}</td>
+                  <td>{{i.payment_orderid}}</td>
+                </tr>
+            {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          </div>
+
+          <div class="row mt-4" id="vendor_admin"style="display:none"> 
+            <div class="col-md-12 table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">s/n</th>
+                    <th scope="col">vendor ID</th>
+                    <th scope="col">vendor firstname</th>
+                    <th scope="col">vendor lastNAME</th>
+                    <th scope="col">vendor email</th>
+                    <th scope="col">vendor phoneno</th>
+                    <th scope="col">vendor storename</th>
+                    <th scope="col">vendor address</th>
+                    
+                   </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                   {% for i in  vendor %}
+                    <td>{{loop.index}}</td>
+                    <td>{{i.vendor_id}}</td>
+                    <td>{{i.vendor_fname}}</td>
+                    <td>{{i.vendor_lname}}</td>
+                    <td>{{i.vendor_email}}</td>
+                    <td>{{i.vendor_phoneno}}</td>
+                    <td>{{i.vendor_storename}}</td>
+                    <td>{{i.vendor_address}}</td>
+
+                  </tr>
+              {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+
+
+
+
+            <div class="row mt-4" id="order_deets"style="display:none"> 
+              <div class="col-md-12 table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">s/n</th>
+                      <th scope="col">order_deet id</th>
+                      <th scope="col">order_deet quantity</th>
+                      <th scope="col">order_deet amount</th>
+                      <th scope="col">order_deet orderid</th>
+                      <th scope="col">order_deet vendorid</th>
+                      <th scope="col">order_deet productid</th>
+                      <th scope="col">order_deet categoryid</th>
+                    
+                      
+                     </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                    
+                     
+                     {% for i in  orderdeets %}
+                      <td>{{loop.index}}</td>
+                      <td>{{i.orderdeet_id}}</td>
+                      <td>{{i.orderdeet_quantity}}</td>
+                      <td>{{i.orderdeet_amt}}</td>
+                      <td>{{i.orderdeet_orderid}}</td>
+                      <td>{{i.orderdeet_vendorid}}</td>
+                      <td>{{i.orderdeet_productid}}</td>
+                      <td>{{i.orderdeet_categoryid}}</td>
+
+                     
+                    </tr>
+                {% endfor %}
+                  </tbody>
+                </table>
+        
+        
+        
+        
+              </div>
+              </div>
+
+
+
+{% endblock %}

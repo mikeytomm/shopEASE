@@ -1,0 +1,10 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+
+
+{%set msg= get_flashed_messages()%}
+{%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig alert alert-success "style="color:#DC3545">{{i}}</h2>
+
+{%endfor%}  
+{% endblock %}

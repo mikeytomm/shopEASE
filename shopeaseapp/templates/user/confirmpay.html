@@ -1,0 +1,18 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+
+<div class='row'>
+    <div class=' mt-3 offset-md-2 col-md-8 alert alert-success'>
+    <h1>Dear {{userdeets.user_fname}} you are about to pay the sum of <span style="color:red">#{{deets.payment_amount}}</span>... kindly proceeed
+   <form class='alert alert-success'action="" method="post" class='form-control'>
+        <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+        <button class='btn btn-success form-control' type="submit">click to proceed</button>
+
+
+    </form>
+</h1>
+</div>
+
+</div>
+
+{% endblock %}

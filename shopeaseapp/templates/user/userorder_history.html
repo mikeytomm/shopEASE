@@ -1,0 +1,61 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+
+<div class="row">
+<div class="col-md-12">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">s/n</th>
+          
+          <th scope="col">order status</th>
+          <th scope="col">order ref</th>
+          <th scope="col">show details</th>
+         
+         </tr>
+      </thead>
+      <tbody>
+        <tr>
+        
+         
+          {% for x in orders%}
+          <td>{{loop.index}}</td>
+          <td>{{x.order_status}}</td>
+          <td>{{x.order_ref}}</td>
+          
+
+          <form action="/user/order/history/{{x.order_id}}" method="POST">
+            <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+          <td><button type="submit" class="btn btn-success">show details</button></td>
+        </form>
+        
+         
+          
+        </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+  </div>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock%}

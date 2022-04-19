@@ -1,0 +1,261 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+<!-- header ends here -->
+
+
+
+
+<!--login form starts here-->
+<div class="row  text-center" >
+
+<div class=" col-md-12" >
+   
+   
+    {% if session.get("logge") != None %}
+<h2 class=" animate__animated  animate__fadeInUpBig" style="color:#DC3545;font-family:'Rubik Beastly', cursive">Welcome  {{vendordeets.vendor_storename}} !!! You've Got Products to sell?</h2>
+{% endif %}
+<hr>
+{%set msg= get_flashed_messages()%}
+          {%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+          
+          {%endfor%}   
+</div>
+
+
+
+<div class=" col-md-12" >
+<a href="{{url_for('vendor_logout')}}" class="btn btn-danger  col-md-2">LOG OUT</a>
+<a href="{{url_for('vendor_edit')}}" class="btn btn-danger col-md-2" id="btneditvendorprof">edit profile</a>
+</div>
+</div>
+
+<div class="row mt-3  text-center" >
+    <div class=" offset-md-3 col-md-3 vendloghov" style="background-color:red"><a href="#">
+        <h1 style="text-align:center;vertical-align:middle;line-height:200px" onclick="vend_uploadhistory()">history</h1></a>
+        </div>
+<div class=" col-md-2 vendsignhov" style="background-color:yellow"><a href="#">
+<h1 style="text-align:center;vertical-align:middle;line-height:200px" onclick="show_uploaddiv()">upload</h1></a>
+</div>
+<div class="text-center col-md-2  vendloghov" style="background-color:red"><a href="#">
+<h1 style="text-align:center;vertical-align:middle;line-height:200px;"onclick="show_orderdiv()">ORDERS</h1></a>
+</div>
+
+</div>
+
+</div>
+<!--upload form starts here-->
+
+<div id="vendupload"class="row"style="display:none">
+<div class="offset-md-1 col-md-10">
+
+<h2 class=" animate__animated  animate__fadeInUpBig text-center "style="color:#DC3545">Upload products here</h2>
+
+<form action="{{url_for('addproduct')}}" method="POST" enctype="multipart/form-data">
+<input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+<input class="form-control" type="text" name="product_name" value="" id="productnameid" placeholder="product_name">
+<br>
+
+<input class="form-control" type="number" name="product_quantity" value="" id="quantityid" placeholder=" product quantity">
+<br>
+<input class="form-control"type="text" name="product_price" value="" id="productpriceid" placeholder="product price" >
+<br>
+<input class="form-control"type="textarea" name="product_description" value="" id="productdescriotionid" placeholder="product description" >
+
+<div>
+    <br>
+<input class="form-control" type="file" name="image"  value=""id="mainproductimage" placeholder="product main image" >
+<br>
+
+<select name="product_category" class="form-control">
+   
+    <option  >choose a category</option>
+    {% for i in categorydeets %}
+    <option value="{{i.category_id}}" >{{i.category_name}}</option>
+    {% endfor %}
+</select>
+<input class="form-control"type="hidden" name="product_vendorid" value="{{vendordeets.vendor_id}}" id="productdescriotionid" placeholder="product description" >
+</div>
+
+<br>
+<button type="submit" name="upload_product" class="form-control btn btn-danger mt-2" style="color:fff" >upload</button>
+
+</form>
+</div>
+</div>
+
+
+
+<div id="vendorder"class="row" style="display:none">
+<div class="offset-md-1 col-md-10">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">s/n</th>
+        <th scope="col">product_name</th>
+        <th scope="col">order_quantity</th>
+     
+        
+        <th scope="col">order_status</th>
+        <th scope="col">change order status</th>
+        <th scope="col">order_refno</th>
+        <th scope="col">User Phonenumber</th>
+        <th scope="col">User Address</th>
+        
+        
+     
+      
+      </tr>
+    </thead>
+    <tbody>
+      {% for x,y in zip(list2,list4) %}
+      
+      {% for j,k in zip(x,y) %}
+      <tr>
+        
+       
+        <td>{{loop.index }}</td>
+        <td>{{j.orderdeet_product.product_name}}</td>
+        <td>{{j.orderdeet_quantity}}</td>
+      
+
+        
+
+        <form action="/vendor/order/editstatus/submit/{{j.orderdeet_order.order_id}}" method="POST">
+          <input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+        <td><select class="form-control" name="status" >
+          
+          <option value="{{j.orderdeet_order.order_status}}">{{j.orderdeet_order.order_status}}</option>
+          <option value="settled">settled</option>
+          
+          
+        </select></td>
+     
+        <td><button type='submit'class="btn btn-success">edit order status</button></td>
+      </form>
+        <td>{{j.orderdeet_order.order_ref}}</td>
+        <td>{{k. user_phoneno}}</td>
+        <td>{{k.user_address}}</td>
+       
+        
+        
+
+
+      </tr>
+      {% endfor %}
+        {% endfor %}
+     
+
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+<div id="venduploadhistory"class="row" style="display:none">
+    <div class="offset-md-1 col-md-10">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">s/n</th>
+                <th scope="col">product name</th>
+                <th scope="col">product quantity</th>
+                <th scope="col">product price</th>
+                <th scope="col">product image</th>
+                <th scope="col">product description</th>
+                <th scope="col">product category</th>
+                <th scope="col">EDIT</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+
+                {% for i in productdeets %}
+              <tr>
+                
+                <td>{{loop.index}}</td>
+                <td>{{i.product_name}}</td>
+                <td>{{i.product_quantity}}</td>
+                <td>{{i.product_price}}</td>
+                <td><img src="/static/uploadedimg/{{i.product_image}}" width="100"></td>
+                <td>{{i.product_description}}</td>
+                <td>{{i.productcateobj.category_name}}</td>
+                <td><button class="form-control btn btn-success"><a  href="/vendor/edit/upload/{{i.product_id}}">EDIT</a></button></td>
+                
+                
+                
+              </tr>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+          
+          
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="vendorderhistory"class="row" style="display:none">
+      <div class="offset-md-1 col-md-10">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">s/n</th>
+              <th scope="col">product_name</th>
+              <th scope="col">order_quantity</th>
+              <th scope="col">order_status</th>
+              <th scope="col">order_refno</th>
+              <th scope="col">contact-no</th>
+              <th scope="col">delivery address</th>
+           
+            
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for x,y in zip(list2,list4) %}
+      
+      {% for j,k in zip(x,y) %}
+             {% if j.orderdeet_order.order_status=='pending'%}
+             <td>{{j.orderdeet_product.product_name}}</td>
+        <td>{{j.orderdeet_quantity}}</td>
+        {%else%}
+        <td>{{j.orderdeet_product.product_name}}</td>
+        <td>{{j.orderdeet_quantity}}</td>
+        {%endif%}
+
+              
+      
+      
+            </tr>
+            {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
+      
+      
+      </div>
+      </div>
+
+
+
+
+
+
+{% endblock %}

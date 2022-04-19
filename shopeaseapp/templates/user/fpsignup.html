@@ -1,0 +1,64 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+
+<!-- header ends here -->
+<!--login form starts here-->
+<div class="row  text-center" >
+<div class="col-md-7  ">
+<img src="{{url_for('static',filename='ttt.webp')}}" width="100%" class="animate__animated  animate__swing" >
+
+
+
+</div>
+<div class="col-md-5">
+<div class="row">
+<div class=" col-md-12 " id="signup">
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">Sign Up</h2>
+
+{%set msg= get_flashed_messages()%}
+          {%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+          
+          {%endfor%}   
+<form action="{{url_for('user_signup_submit')}}" method="POST">
+<input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+
+<input class="form-control" type="text" name="firstname" value="" id="firstnameid" placeholder="first name">
+<br>
+<input class="form-control" type="text" name="lastname" value="" id="lastnameid" placeholder="last name">
+<br>
+<input class="form-control" type="email" name="email" value="" id="emailid" placeholder="email">
+<br>
+<input class="form-control"type="text" name="phoneno" value="" id="phonenoid" placeholder="mobile no" >
+<br>
+<div>
+<br>
+<input class="form-control" type="text" name="address"  value=""id="useradress" placeholder="home adress" >
+<br>
+<input class="form-control" type="password" name="password" value="" id="userpwrd" placeholder="password"  >
+</div>
+<div id="passwordHelpBlock" class="form-text">
+  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+</div>
+<br>
+<input class="form-control" type="password" name="passwordconf" value="" id="userpwrdconfs" placeholder="confim password" >
+<br>
+<button type="submit"class="form-control btn btn-danger mt-2" style="color:fff" >Sign Up</button>
+
+</form>
+</div>
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+<!--login form ends here-->
+
+
+
+{% endblock %}

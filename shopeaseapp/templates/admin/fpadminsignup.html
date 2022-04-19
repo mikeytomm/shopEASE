@@ -1,0 +1,46 @@
+{% extends 'user/layout.html' %}
+{% block pagecontent %}
+<!-- header ends here -->
+<div class="row  text-center" >
+<div class="col-md-12">
+<h2 class=" animate__animated  animate__fadeInUpBig" style="color:#DC3545;font-family:'Rubik Beastly', cursive">wassup!!!! ADMIN...SIGN UP</h2>
+<hr>
+</div>
+</div>
+
+
+
+<!--login form starts here-->
+<div class="row  text-center" >
+
+<div class="offset-md-3 col-md-6">
+<div class="row">
+<div class=" col-md-12  mt-5"  id="login"  style="min-height:300px" >
+<form action="{{url_for('admin_signup_submit')}}" method="POST">
+<h2 class=" animate__animated  animate__fadeInUpBig" style="color:#DC3545">Sign up</h2>
+{%set msg= get_flashed_messages()%}
+          {%for i in msg:%}
+<h2 class=" animate__animated  animate__fadeInUpBig "style="color:#DC3545">{{i}}</h2>
+          
+          {%endfor%}   
+
+<input type="hidden" class="form-control" name="csrf_token" value="{{csrf_token()}}">
+<input  class="form-control mt-3"type="email" placeholder="enter your valid email" name="admin_email" value="">
+<br>
+<input class="form-control" type="password" placeholder="enter your password" name="admin_password" value="">
+<br>
+<input class="form-control" type="password" name="admin_passwordconf" value="" id="admin_pwrdconfs"placeholder="confim password" >
+<br>
+<button type="submit" name="admin_signupsubmit" class="btn btn-danger form-control" >sign up</button>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+<!--login form ends here-->
+
+
+
+<!-- footer starts here -->
+{% endblock %}
